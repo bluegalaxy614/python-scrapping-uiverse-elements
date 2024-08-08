@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from pymongo import MongoClient
 from dotenv import load_dotenv
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import os
 import time
 
@@ -68,18 +69,28 @@ def scraper(db_collection, driver, origin_url, category, tag, style, page):
         if not all_articles:
             return False
         
+        links = []
         for article in all_articles:
-            links = [link.get_attribute("href") for link in article.find_elements(By.TAG_NAME, "a") if link.get_attribute("href")]
-            for link in links:
-                print(link)
-                store_data_by_link(db_collection, driver, link, category, tag, style)
+            article_links = [link.get_attribute("href") for link in article.find_elements(By.TAG_NAME, "a") if link.get_attribute("href")]
+            links.extend(article_links)
+        
+        with ThreadPoolExecutor(max_workers=5) as executor:
+            futures = [
+                executor.submit(store_data_by_link, db_collection, driver, link, category, tag, style)
+                for link in links
+            ]
+            
+            for future in as_completed(futures):
+                try:
+                    future.result()
+                except Exception as e:
+                    print(f"Error during threaded execution: {e}")
                 
         return True
         
     except Exception as e:
         print(f"Error scraping page {page} for {category} - {tag} - {style}: {e}")
         return False
-
 
 def main():
     load_dotenv()
@@ -110,11 +121,11 @@ def main():
                 for style in styles:
                     page = 0
                     while True:
-                        page += 1
                         is_not_final_page = scraper(db_collection, driver, origin_url, category, tag, style, page)
                         if not is_not_final_page:
                             break
                         time.sleep(1)  # Be polite to the server and avoid potential rate limits
+                        page += 1
     finally:
         driver.quit()
         client.close()
