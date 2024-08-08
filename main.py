@@ -6,9 +6,13 @@ from selenium.webdriver.support import expected_conditions as EC
 from pymongo import MongoClient
 from dotenv import load_dotenv
 import os
+import time
 
 def store_data_to_db(db_collection, document):
-    db_collection.insert_one(document)
+    try:
+        db_collection.insert_one(document)
+    except Exception as e:
+        print(f"Error storing document to MongoDB: {e}")
     
 def store_data_by_link(db_collection, driver, link, category, tag, style):
     driver.get(link)
