@@ -31,7 +31,12 @@ tags = ["neumorphism", "3d", "gradient"]
 for tag in tags:
     print(f"Extracting data for tag: {tag}")
     url_for_tag = f"{url_for_button}?tags={tag}"
-    data = scraper(driver, url_for_tag)
-    print(f"Extracted Data: {data}")
+    page = 0
+    while True:
+        next_page_url = f"{url_for_tag}&page={page}"
+        is_not_final_page = scraper(driver, next_page_url)
+        if( is_not_final_page == False ):
+            break
+        page += 1
 
 driver.quit()
