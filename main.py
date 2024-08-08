@@ -24,5 +24,7 @@ service = Service(chrome_driver_path)
 driver = webdriver.Chrome(service=service)
 
 # Call the scraper
-data = scraper(driver, url)
+url_for_button = f"{url}/buttons"
+print(f"URL for button: {url_for_button}")
+data = scraper(driver, url_for_button)
 print(f"Extracted Data: {data}")
