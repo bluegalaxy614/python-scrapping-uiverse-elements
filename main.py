@@ -25,6 +25,13 @@ driver = webdriver.Chrome(service=service)
 
 # Call the scraper
 url_for_button = f"{url}/buttons"
-print(f"URL for button: {url_for_button}")
-data = scraper(driver, url_for_button)
-print(f"Extracted Data: {data}")
+
+tags = ["neumorphism", "3d", "gradient"]
+
+for tag in tags:
+    print(f"Extracting data for tag: {tag}")
+    url_for_tag = f"{url_for_button}?tags={tag}"
+    data = scraper(driver, url_for_tag)
+    print(f"Extracted Data: {data}")
+
+driver.quit()
