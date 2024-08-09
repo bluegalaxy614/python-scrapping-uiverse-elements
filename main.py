@@ -21,9 +21,19 @@ def store_data_by_link(db_collection, driver, link, category, tag, style):
         WebDriverWait(driver, 30).until(
             EC.presence_of_element_located((By.TAG_NAME, "main"))
         )
-        
-        str_for_html = driver.find_element(By.TAG_NAME, "textarea").text
-        str_for_css = driver.find_element(By.TAG_NAME, "style").text
+            
+        str_for_css = driver.find_element(By.TAG_NAME, "textarea").text
+        if(str_for_css == []):
+            return
+        str_for_css = []
+        if(tag == "css"):
+            html_button = driver.find_element(By.CSS_SELECTOR, "button.px-4 py-1 pl-3 max-w-[170px] w-full cursor-pointer font-sans text-base font-semibold text-gray-200 flex gap-2 items-center transition-colors rounded-b-none border-none rounded-md label hover:bg-[#1e1e1e] bg-dark-700")
+            if(html_button):
+                html_button.click()
+                WebDriverWait(driver, 30).until(
+                EC.presence_of_element_located((By.TAG_NAME, "main"))
+                )
+                str_for_html = driver.find_element(By.TAG_NAME, "textarea").text
         
         element_for_views = driver.find_element(By.CSS_SELECTOR, "div.flex.items-center.pl-3")
         views_text = element_for_views.text
