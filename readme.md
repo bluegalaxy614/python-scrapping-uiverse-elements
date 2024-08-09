@@ -25,7 +25,7 @@ This project is a Python-based web scraper that uses Selenium to extract data fr
 1. **Clone the Repository**
 
     ```bash
-    git clone https://github.com/yourusername/selenium-web-scraper.git
+    git clone https://github.com/bluegalaxy614/python-scrapping-uiverse-elements
     cd selenium-web-scraper
     ```
 
