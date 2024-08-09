@@ -70,7 +70,7 @@ This project is a Python-based web scraper that uses Selenium to extract data fr
 
     The script will begin scraping the specified URL, extract the required data, and store it in the MongoDB database you configured.
 
-## Data Output
+### Data Output
 
     The data is stored in a MongoDB collection, with each document containing fields like:
 
@@ -84,7 +84,7 @@ This project is a Python-based web scraper that uses Selenium to extract data fr
     tags: Associated tags.
     report_date: The date of the report or last update.
 
-## Environment Variables
+### Environment Variables
 
     The project relies on the following environment variables:
 
@@ -94,7 +94,7 @@ This project is a Python-based web scraper that uses Selenium to extract data fr
     DB_COLLECTION: The name of the MongoDB collection.
     CHROME_DRIVER_PATH: The full path to the ChromeDriver executable.
 
-## Contributing
+### Contributing
 
     If you would like to contribute, feel free to create a pull request or open an issue.
 
