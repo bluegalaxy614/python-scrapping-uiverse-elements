@@ -105,10 +105,10 @@ The project relies on the following environment variables set in the `.env` file
 ## Project Structure
 
     ```plaintext
-    selenium-web-scraper/
+    python-scrapping-uiverse-elements/
     │
     ├── .env                # Environment variables
-    ├── scraper.py          # Main Python script
+    ├── main.py          # Main Python script
     ├── requirements.txt    # Python dependencies
     ├── README.md           # This README file
     └── venv/               # Virtual environment directory
