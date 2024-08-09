@@ -55,8 +55,8 @@ This project is a Python-based web scraper that uses Selenium to extract data fr
 
     Create a .env file in the root directory and add the following variables:
 
-    TARGET_URL=https://uiverse.io/
-    DB_URL=mongodb://localhost:27017/
+    TARGET_URL=https://uiverse.io
+    DB_URL=mongodb://localhost:27017
     DB_NAME=mydatabase
     DB_COLLECTION=mycollection
     CHROME_DRIVER_PATH=/path/to/chromedriver
@@ -108,5 +108,3 @@ This project is a Python-based web scraper that uses Selenium to extract data fr
 - **Installation**: Step-by-step instructions to set up your environment.
 - **Usage**: How to configure and run the scraper.
 - **Environment Variables**: Details on necessary configuration settings.
-
-This `README.md` file is a complete guide for anyone who wants to understand, set up, and run your Selenium-based web scraper project.
